@@ -1,1 +1,57 @@
-<p>currency-converter works!</p>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white text-center">
+          <h4 class="mb-0">Conversor De Divisas</h4>
+        </div>
+        <div class="card-body">
+          
+          <div class="row g-3 align-items-end">
+            
+            <div class="col-md-4">
+              <label for="monto" class="form-label fw-bold">Cantidad</label>
+              <input type="number" id="monto" class="form-control" [(ngModel)]="cantidad" min="1">
+            </div>
+
+            <div class="col-md-4">
+              <label for="origen" class="form-label fw-bold">De</label>
+              <select id="origen" class="form-select" [(ngModel)]="monedaOrigen">
+                @for (moneda of monedas; track moneda.code) {
+                  <option [value]="moneda.code">{{ moneda.code }} - {{ moneda.name }}</option>
+                }
+              </select>
+            </div>
+
+            <div class="col-md-4">
+              <label for="destino" class="form-label fw-bold">A</label>
+              <select id="destino" class="form-select" [(ngModel)]="monedaDestino">
+                @for (moneda of monedas; track moneda.code) {
+                  <option [value]="moneda.code">{{ moneda.code }} - {{ moneda.name }}</option>
+                }
+              </select>
+            </div>
+          </div>
+
+          <div class="d-grid mt-4">
+            <button class="btn btn-success btn-lg" (click)="realizarConversion()" [disabled]="isLoading">
+              @if (isLoading) {
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Convirtiendo...
+              } @else {
+                Convertir
+              }
+            </button>
+          </div>
+
+          @if (resultado !== null && !isLoading) {
+            <div class="alert alert-success mt-4 text-center fs-4" role="alert">
+              <strong>{{ cantidad }} {{ monedaOrigen }}</strong> = 
+              <span class="text-primary fw-bold">{{ resultado }} {{ monedaDestino }}</span>
+            </div>
+          }
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -65,7 +65,8 @@
               "buildTarget": "tp-webservice-5302:build:production"
             },
             "development": {
-              "buildTarget": "tp-webservice-5302:build:development"
+              "buildTarget": "tp-webservice-5302:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

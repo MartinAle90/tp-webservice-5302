@@ -14,13 +14,19 @@
     @for (movie of moviesList; track movie.title) {
       <div class="col">
         <div class="card h-100 shadow-sm border-0">
-          <img [src]="movie.image" class="card-img-top" alt="Póster de {{ movie.title }}">
+          <img
+            [src]="movie.image || movie.big_image || movie.thumbnail || fallbackImage"
+            class="card-img-top"
+            alt="Póster de {{ movie.title }}"
+            loading="lazy"
+            (error)="handleImageError($event)"
+          >
           
           <div class="card-body">
             <h5 class="card-title text-truncate" [title]="movie.title">{{ movie.title }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">Año: {{ movie.year }}</h6>
             
-            <p class="card-text" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+            <p class="card-text" style="display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
               {{ movie.description }}
             </p>
           </div>

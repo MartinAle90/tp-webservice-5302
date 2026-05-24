@@ -11,6 +11,7 @@ import { MoviesService } from '../../services/movies';
 export class MoviesComponent implements OnInit {
   // Aquí guardaremos las películas que lleguen de la API
   moviesList: Movie[] = [];
+  fallbackImage = '/movie-poster-placeholder.svg';
 
   // Variable para mostrar un "Spinner" de carga mientras llegan los datos
   isLoading: boolean = true;
@@ -30,7 +31,6 @@ export class MoviesComponent implements OnInit {
       next: (data) => {
         this.moviesList = data; // Guardamos las películas en la variable
         this.isLoading = false; // Desactivamos el "Spinner"
-
         this.cdr.detectChanges();
       },
       error: (error: any) => {
@@ -39,5 +39,11 @@ export class MoviesComponent implements OnInit {
         this.cdr.detectChanges();
       },
     });
+  }
+
+  handleImageError(event: Event): void {
+    const imageElement = event.target as HTMLImageElement;
+    imageElement.onerror = null;
+    imageElement.src = this.fallbackImage;
   }
 }
