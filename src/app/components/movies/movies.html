@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <h2 class="mb-4 text-center fw-bold">Top 100 Películas (IMDb)</h2>
+
+  @if (isLoading) {
+    <div class="d-flex justify-content-center my-5">
+      <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+    </div>
+  }
+
+  <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+    
+    @for (movie of moviesList; track movie.title) {
+      <div class="col">
+        <div class="card h-100 shadow-sm border-0">
+          <img
+            [src]="movie.image || movie.big_image || movie.thumbnail || fallbackImage"
+            class="card-img-top"
+            alt="Póster de {{ movie.title }}"
+            loading="lazy"
+            (error)="handleImageError($event)"
+          >
+          
+          <div class="card-body">
+            <h5 class="card-title text-truncate" [title]="movie.title">{{ movie.title }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Año: {{ movie.year }}</h6>
+            
+            <p class="card-text" style="display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+              {{ movie.description }}
+            </p>
+          </div>
+          
+          <div class="card-footer bg-white border-top-0">
+            @for (genre of movie.genre; track genre; let i = $index) {
+              <span class="badge ms-1" [class]="['bg-primary', 'bg-secondary', 'bg-success', 'bg-danger', 'bg-info'][i % 5]">{{ genre }}</span>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

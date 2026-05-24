@@ -1,0 +1,50 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm border-0">
+        
+        <div class="card-header bg-dark text-white text-center py-3">
+          <h4 class="mb-0">Conversor de Texto a Voz (IA)</h4>
+        </div>
+        
+        <div class="card-body p-4">
+          
+          <div class="mb-3">
+            <label for="vozSelect" class="form-label fw-bold">Voz</label>
+            <select id="vozSelect" class="form-select" [(ngModel)]="vozSeleccionada">
+              @for (voz of voces; track voz.code) {
+                <option [value]="voz.code">{{ voz.label }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="mb-4">
+            <label for="textoInput" class="form-label fw-bold">Texto a convertir</label>
+            <textarea id="textoInput" class="form-control" rows="4" 
+                      placeholder="Escribe aquí lo que deseas que la inteligencia artificial lea..."
+                      [(ngModel)]="textoAConvertir"></textarea>
+          </div>
+
+          <div class="d-grid mb-4">
+            <button class="btn btn-primary btn-lg" (click)="generarAudio()" [disabled]="isLoading">
+              @if (isLoading) {
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Procesando Audio...
+              } @else {
+                Generar Audio
+              }
+            </button>
+          </div>
+
+          @if (audioSource && !isLoading) {
+            <div class="text-center p-3 bg-light rounded border">
+              <p class="text-success fw-bold mb-3">Audio generado correctamente.</p>
+              <p class="text-muted mb-2">La reproducción usa una etiqueta audio como elemento media.</p>
+              <audio class="w-100" controls autoplay [src]="audioSource"></audio>
+            </div>
+          }
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

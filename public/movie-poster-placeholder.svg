@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="562" viewBox="0 0 380 562" role="img" aria-label="Poster no disponible">
+  <rect width="380" height="562" fill="#1f2937"/>
+  <rect x="24" y="24" width="332" height="514" rx="20" fill="#111827" stroke="#374151" stroke-width="2"/>
+  <circle cx="190" cy="214" r="56" fill="#374151"/>
+  <path d="M116 388c18-52 47-78 74-78s56 26 74 78" fill="#374151"/>
+  <text x="190" y="470" fill="#9ca3af" font-family="Arial, sans-serif" font-size="24" text-anchor="middle">Póster no disponible</text>
+</svg>
